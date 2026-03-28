@@ -66,7 +66,7 @@ await sendEmail({
           </p>
 
           <!-- CTA BUTTON -->
-          <a href="http://localhost:5173"
+          <a href="https://shoppingo-orcin.vercel.app"
             style="
               display:inline-block;
               background:#f97316;
