@@ -12,7 +12,7 @@ import vendorDashboardRoutes from "./routes/vendorDashboard.routes.js";
 import adminDashboardRoutes from "./routes/adminDashboard.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import wishlistRoutes from "./routes/wishlist.routes.js";
-
+import connectDB from "./config/db.js";
 
 
 const app = express();
@@ -25,6 +25,19 @@ app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true
 }));
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error(" Database connection failed:", error.message);
+    res.status(500).json({
+      success: false,
+      message: "Database connection failed"
+    });
+  }
+});
 
 app.use('/api/auth', authRoutes);
 app.use("/api/vendor", vendorRoutes);
